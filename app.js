@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   res.send('Hello World!');
 });
 app.use(router);
-mongoose.connect('mongodb://localhost/userModel');
+mongoose.connect('mongodb://localhost/userData');
 app.listen(3000, () => {
   console.log('http://localhost:3000');
 });
