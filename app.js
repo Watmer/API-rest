@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 const express = require('express');
 
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,6 +14,7 @@ router.get('/', (req, res) => {
   res.send('Hello World!');
 });
 app.use(router);
+mongoose.connect('mongodb://localhost/userModel');
 app.listen(3000, () => {
   console.log('http://localhost:3000');
 });
