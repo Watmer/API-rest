@@ -1,11 +1,10 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable func-names */
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 
 const Data = mongoose.model('Data');
 
-exports.findAllData = function (req, res) {
+exports.findAllData = function findAllData(req, res) {
   Data.find((err, userData) => {
     if (err) res.send(500, err.message);
 
@@ -13,7 +12,7 @@ exports.findAllData = function (req, res) {
     res.status(200).jsonp(userData);
   });
 };
-exports.addData = function (req, res) {
+exports.addData = function addData(req, res) {
   console.log('POST');
   console.log(req.body);
 
@@ -25,8 +24,8 @@ exports.addData = function (req, res) {
     gender: req.body.gender,
   });
 
-  userData.save((err, userData) => {
-    if (err) return res.status(500).send(err.message);
-    res.status(200).jsonp(userData);
+  userData.save((err, newUser) => {
+    if (err) return res.status(400).send(err.message);
+    res.status(200).jsonp(newUser);
   });
 };
