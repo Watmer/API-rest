@@ -1,22 +1,14 @@
-/* eslint-disable consistent-return */
 /* eslint-disable no-console */
-const mongoose = require('mongoose');
+const User = require('../Models/userModel');
 
-const Data = mongoose.model('Data');
-
-exports.findAllData = function findAllData(req, res) {
-  Data.find((err, userData) => {
-    if (err) res.send(500, err.message);
-
-    console.log('GET /userData');
-    res.status(200).jsonp(userData);
+exports.getUser = function getData(req, res) {
+  User.get((err, user) => {
+    if (err) res.send(400, err.message);
+    res.status(200).jsonp(user);
   });
 };
-exports.addData = function addData(req, res) {
-  console.log('POST');
-  console.log(req.body);
-
-  const userData = new Data({
+exports.newUser = (req, res) => {
+  const userData = new User({
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
@@ -24,8 +16,39 @@ exports.addData = function addData(req, res) {
     gender: req.body.gender,
   });
 
-  userData.save((err, newUser) => {
+  userData.save((err, saveUser) => {
     if (err) return res.status(400).send(err.message);
-    res.status(200).jsonp(newUser);
+    return res.status(200).jsonp(saveUser);
+  });
+};
+
+exports.viewUser = (req, res) => {
+  User.findById(req.params.userData_id, (err, viewUser) => {
+    if (err) return res.status(400).send(err.message);
+    return res.status(200).jsonp(viewUser);
+  });
+};
+
+exports.updateUser = (req, res) => {
+  User.findById(req.params.id, (updateUser) => {
+    User.name = req.body.name;
+    User.surname = req.body.surname;
+    User.email = req.body.email;
+    User.age = req.body.age;
+    User.gender = req.body.gender;
+
+    updateUser.save((err) => {
+      if (err) return res.status(400).send(err.message);
+      return res.status(200).jsonp(updateUser);
+    });
+  });
+};
+
+exports.deleteUser = (req, res) => {
+  User.findById(req.params.id, (userData) => {
+    userData.remove((err) => {
+      if (err) return res.send(400, err.message);
+      return res.status(200);
+    });
   });
 };

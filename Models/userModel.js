@@ -10,4 +10,4 @@ const userData = new Schema({
   gender: { type: String },
 });
 
-module.exports = mongoose.model('Data', userData);
+module.exports = mongoose.model('User', userData);
