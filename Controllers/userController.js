@@ -30,7 +30,7 @@ exports.viewUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  User.findById(req.params.id, (updateUser) => {
+  User.findById(req.params.userData_id, (updateUser) => {
     User.name = req.body.name;
     User.surname = req.body.surname;
     User.email = req.body.email;
@@ -45,7 +45,7 @@ exports.updateUser = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-  User.findById(req.params.id, (userData) => {
+  User.findById(req.params.userData_id, (userData) => {
     userData.remove((err) => {
       if (err) return res.send(400, err.message);
       return res.status(200);
