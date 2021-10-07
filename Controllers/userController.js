@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const User = require('../Models/userModel');
 
-exports.getUser = function getData(req, res) {
+exports.getUser = (req, res) => {
   User.get((err, user) => {
     if (err) res.send(400, err.message);
     res.status(200).jsonp(user);
