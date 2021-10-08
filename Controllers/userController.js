@@ -31,7 +31,7 @@ exports.viewUser = (req, res) => {
 
 exports.updateUser = (req, res) => {
   User.findById(req.params.userData_id, (updateUser) => {
-    User.name = req.body.name;
+    User.Name = req.body.name;
     User.surname = req.body.surname;
     User.email = req.body.email;
     User.age = req.body.age;
