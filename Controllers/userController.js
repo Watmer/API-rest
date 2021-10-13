@@ -2,9 +2,9 @@
 const User = require('../Models/userModel');
 
 exports.getUser = (req, res) => {
-  User.get((err, user) => {
-    if (err) res.send(400, err.message);
-    res.status(200).jsonp(user);
+  User.find((err, user) => {
+    if (err) return res.send(400, err.message);
+    return res.status(200).jsonp(user);
   });
 };
 exports.newUser = (req, res) => {
