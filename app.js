@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send('Hello World'));
 app.use('/api', userRoutes);
-app.listen(8080, () => {
-  console.log('Running on http://localhost:8080');
+app.listen(8000, () => {
+  console.log('Running on http://localhost:8000');
 });
 module.exports = app;
