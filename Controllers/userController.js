@@ -3,7 +3,7 @@ const User = require('../Models/userModel');
 
 exports.getUser = (req, res) => {
   User.find((err, user) => {
-    if (err) return res.send(400, err.message);
+    if (err) return res.status(400).send(err.message);
     return res.status(200).jsonp(user);
   });
 };
