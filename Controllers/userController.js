@@ -9,7 +9,7 @@ exports.getUser = (req, res) => {
 };
 exports.newUser = (req, res) => {
   const userData = new User({
-    name: req.body.name,
+    Name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
     age: req.body.age,
