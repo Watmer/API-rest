@@ -1,54 +1,55 @@
 /* eslint-disable no-console */
 const User = require('../Models/userModel');
 
-exports.getUser = (req, res) => {
+function getUser(req, res) {
   User.find((err, user) => {
     if (err) return res.status(400).send(err.message);
-    return res.status(200).jsonp(user);
+    return res.status(200).send(user);
   });
-};
-exports.newUser = (req, res) => {
-  const userData = new User({
-    Name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    age: req.body.age,
-    gender: req.body.gender,
-  });
+}
+function newUser(req, res) {
+  const userData = new User(req.body);
 
   userData.save((err, saveUser) => {
     if (err) return res.status(400).send(err.message);
-    return res.status(200).jsonp(saveUser);
+    return res.status(200).send(saveUser);
   });
-};
+}
 
-exports.viewUser = (req, res) => {
-  User.findById(req.params.userData_id, (err, viewUser) => {
+function viewUser(req, res) {
+  User.findById(req.params.userData_id, (err, seeUser) => {
     if (err) return res.status(400).send(err.message);
-    return res.status(200).jsonp(viewUser);
+    return res.status(200).send(seeUser);
   });
-};
+}
 
-exports.updateUser = (req, res) => {
-  User.findById(req.params.userData_id, (updateUser) => {
-    User.Name = req.body.name;
-    User.surname = req.body.surname;
-    User.email = req.body.email;
-    User.age = req.body.age;
-    User.gender = req.body.gender;
+function updateUser(req, res) {
+  User.findById(req.params.userData_id, (changeUser) => {
+    changeUser.name = req.body.name;
+    changeUser.surname = req.body.surname;
+    changeUser.email = req.body.email;
+    changeUser.age = req.body.age;
+    changeUser.gender = req.body.gender;
 
-    updateUser.save((err) => {
+    changeUser.save((err) => {
       if (err) return res.status(400).send(err.message);
-      return res.status(200).jsonp(updateUser);
+      return res.status(200).send(changeUser);
     });
   });
-};
+}
 
-exports.deleteUser = (req, res) => {
+function deleteUser(req, res) {
   User.findById(req.params.userData_id, (userData) => {
     userData.remove((err) => {
       if (err) return res.send(400, err.message);
       return res.status(200);
     });
   });
+}
+module.exports = {
+  getUser,
+  newUser,
+  viewUser,
+  updateUser,
+  deleteUser,
 };
